@@ -62,7 +62,7 @@ class CreateAchievementController extends AbstractCreateController
             Arr::get($data, 'attributes.computation'),
             Arr::get($data, 'attributes.points'),
             Arr::get($data, 'attributes.image'),
-            Arr::get($data, 'attributes.rectangle'),
+            Arr::get($data, 'attributes.rectangle')
             Arr::get($data, 'attributes.active')
         );
 

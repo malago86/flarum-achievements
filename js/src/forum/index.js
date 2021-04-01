@@ -32,56 +32,57 @@ import Page from 'flarum/components/Page'
 
 app.initializers.add('malago-achievements', app => {
   registerModels();
-  
-  extend(CommentPost.prototype, 'oncreate', function(x) {
-    var html="";
-    var points=0;
 
-    if(!this.attrs.post.data.attributes.isHidden){
-      this.attrs.post.data.attributes.achievements.forEach(function(item, index){
+  extend(CommentPost.prototype, 'oncreate', function (x) {
+    var html = "";
+    var points = 0;
+
+    if (!this.attrs.post.data.attributes.isHidden) {
+      this.attrs.post.data.attributes.achievements.forEach(function (item, index) {
         var rectangle = item.rectangle.split(',');
-        var style="background:url("+item.image+");\
-        background-position:-"+rectangle[0]+"px -"+rectangle[1]+"px;\
-        height:"+rectangle[2]+"px;\
-        width:"+rectangle[3]+"px;";
-        html+="<span class='Badge Achievement' style='"+style+"' data-toggle='tooltip' title='"+item.name+"'></span>";
-        points+=item.points;
+        var style = "background:url(" + item.image + ");\
+        background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+        height:"+ rectangle[2] + "px;\
+        width:"+ rectangle[3] + "px;\
+        margin: -"+ (rectangle[3] / 4 - 4) + "px;";
+        html += "<span class='Badge Achievement' style='" + style + "' data-toggle='tooltip' title='" + item.name + "'></span>";
+        points += item.points;
       });
-      html+="<span class='Achievement--Points' data-toggle='tooltip' title='"+app.translator.trans(
-        "malago-achievements.forum.achievement_points")+"'>"+points+"</span>";
+      html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
+        "malago-achievements.forum.achievement_points") + "'>" + points + "</span>";
       $(this.element).append(html);
       $(".Achievement").tooltip();
       $(".Achievement--Points").tooltip();
     }
   });
 
-  extend(Application.prototype,'request', function(promise){
-    if(promise){
-      promise.then(function(data){
-        if(data.new_achievements !== undefined && data.new_achievements !== null && data.new_achievements.length>0)
+  extend(Application.prototype, 'request', function (promise) {
+    if (promise) {
+      promise.then(function (data) {
+        if (data.new_achievements !== undefined && data.new_achievements !== null && data.new_achievements.length > 0)
           app.modal.show(NewAchievementModal, { achievements: data.new_achievements });
       });
     }
   });
 
-  extend(Page.prototype,'oncreate', function(promise){
-    if(app.session.user !== undefined){
-      setTimeout(function(){
-        var new_achievements=app.session.user.achievements();
-      
-        if(new_achievements !== undefined && new_achievements !== null && new_achievements.length>0){
-          var only_new_achievements=[];
-          for(var i = 0; i < new_achievements.length; i++){
-            if(new_achievements[i].data.attributes.new==1){
+  extend(Page.prototype, 'oncreate', function (promise) {
+    if (app.session.user !== undefined) {
+      setTimeout(function () {
+        var new_achievements = app.session.user.achievements();
+
+        if (new_achievements !== undefined && new_achievements !== null && new_achievements.length > 0) {
+          var only_new_achievements = [];
+          for (var i = 0; i < new_achievements.length; i++) {
+            if (new_achievements[i].data.attributes.new == 1) {
               only_new_achievements.push(new_achievements[i].data.attributes)
-              new_achievements[i].save({new:0, user_id:app.session.user.data.id});
+              new_achievements[i].save({ new: 0, user_id: app.session.user.data.id });
             }
           }
-          if(only_new_achievements.length>0)
+          if (only_new_achievements.length > 0)
             app.modal.show(NewAchievementModal, { achievements: only_new_achievements });
         }
-      },1000);    
+      }, 1000);
     }
-  }); 
+  });
 
 });

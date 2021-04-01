@@ -1,6 +1,6 @@
 # Achievements Extension for Flarum
 
-[![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/malago/flarum-achievements/blob/master/LICENSE) [![Latest Stable Version](https://img.shields.io/packagist/v/malago/flarum-achievements.svg)](https://packagist.org/packages/malago/flarum-achievements) [![Total Downloads](https://img.shields.io/packagist/dt/malago/flarum-achievements.svg)](https://packagist.org/packages/malago/flarum-achievements)
+[![GPLv3 license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/malago/flarum-achievements/blob/master/LICENSE) [![Latest Stable Version](https://img.shields.io/packagist/v/malago/flarum-ext-fancybox.svg)](https://packagist.org/packages/malago/flarum-achievements) [![Total Downloads](https://img.shields.io/packagist/dt/malago/flarum-ext-fancybox.svg)](https://packagist.org/packages/malago/flarum-achievements)
 
 ## Features
 - Reward your users with forum achievements

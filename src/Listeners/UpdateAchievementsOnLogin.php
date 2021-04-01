@@ -44,6 +44,12 @@ class UpdateAchievementsOnLogin
                 "count"=>$years,
                 "user"=>$event->user,
                 "new"=>1,
+            ),
+            array(
+                "type"=>"avatar",
+                "count"=>($event->user->avatar_url!=NULL ? 1:-1),
+                "user"=>$event->user,
+                "new"=>1,
             )
         );
 
