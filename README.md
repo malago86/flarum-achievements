@@ -24,9 +24,11 @@ php flarum cache:clear
 
 Intructions on how to create achievements are on the corresponding admin page.
 
+[See video](https://i.imgur.com/yYspfZF.mp4)
+
 ## Links
 
-<!-- - [Flarum Discuss post](https://discuss.flarum.org/d/XXX) -->
+- [Flarum Discuss post](https://discuss.flarum.org/d/26675-flarum-achievements-reward-your-users-for-participating)
 - [Source code on GitHub](https://github.com/malago86/flarum-achievements)
 - [Changelog](https://github.com/malago86/flarum-achievements/blob/master/CHANGELOG.md)
 - [Download via Packagist](https://packagist.org/packages/malago/flarum-achievements)
