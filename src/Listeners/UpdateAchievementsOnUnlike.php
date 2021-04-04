@@ -41,7 +41,7 @@ class UpdateAchievementsOnUnlike
             ),
         );
         
-        $event->actor["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
+        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
 
         $arr = array(
             array(

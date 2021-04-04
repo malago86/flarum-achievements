@@ -22,10 +22,18 @@ class MiddlewarePosted implements MiddlewareInterface {
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $actor = $request->getAttribute('actor');        
+        $actor = $request->getAttribute('actor');    
+
+
+
         $response = $handler->handle($request);
+        // if(isset($GLOBALS["new_achievements"]))
+		//     app('log')->error("global: ".print_r($GLOBALS["new_achievements"],TRUE));		
+
+		
         
         $where = $request->getAttribute('routeName');
+		
         if($actor->id != 0){
             $post = $this->toAssoc($actor->achievements->toArray());
 
@@ -34,12 +42,13 @@ class MiddlewarePosted implements MiddlewareInterface {
                 if(method_exists($response,"getPayload")){
                     $current = $this->toAssoc($actor->achievements->toArray());
                     $currentPayload=$response->getPayload();
-                    $currentPayload["new_achievements"]=$actor["new_achievements"];
+                    if(isset($GLOBALS["new_achievements"]))
+                        $currentPayload["new_achievements"]=$GLOBALS["new_achievements"];
         
                     $response = $response->withPayload($currentPayload);
                 }
             }else{
-                // app('log')->error(print_r("Where: ".$where,TRUE));
+                 //app('log')->error(print_r("Where: ".$where,TRUE));
             }
         }
         return $response;

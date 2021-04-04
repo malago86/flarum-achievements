@@ -34,7 +34,12 @@ class UpdateAchievementsOnDiscussion
                 "new"=>0,
             )
         );
-        
-        $event->actor["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
+        // app('log')->error(print_r("HERE",TRUE));
+        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
+		
+		/*try{
+			$event->actor["new_achievements"] = $ret;
+		}catch(Exception $e){
+		}*/
     }
 }

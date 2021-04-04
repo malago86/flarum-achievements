@@ -52,9 +52,12 @@ class UpdateAchievementsOnPost
             ),
         );
 
-        app('log')->error(print_r($arr,TRUE));
+        //app('log')->error(print_r($arr,TRUE));
 
-        $event->actor["new_achievements"] = $this->calculator->recalculate($event->post->user,$arr);
+        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->post->user,$arr);
+		
+		//$data = Arr::get($request->getParsedBody(), 'data', []);
+				
 
     }
 }

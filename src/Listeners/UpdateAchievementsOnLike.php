@@ -51,11 +51,7 @@ class UpdateAchievementsOnLike
             ),
         );
 
-        // app('log')->error("LIKES RECIBIDOS: ".print_r($arr[1]["count"],TRUE));
 
-
-
-        $event->actor["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
-
+        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
     }
 }
