@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of askvortsov/flarum-trust-levels
+ * This file is part of malago/achievements
  *
- *  Copyright (c) 2021 Alexander Skvortsov.
+ *  Copyright (c) 2021 Miguel A. Lago
  *
  *  For detailed copyright and license information, please view the
  *  LICENSE file that was distributed with this source code.

@@ -139,6 +139,8 @@ class AchievementCalculator
             }
         }
 
+
+
         foreach($removed_achievements as $key=>$achievements_user){
             foreach($achievements_user as $ach){
                 $user = User::where('id',$key)->first();
