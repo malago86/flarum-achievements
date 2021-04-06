@@ -14,6 +14,7 @@
  */
 
 import app from 'flarum/app';
+import icon from "flarum/helpers/icon";
 import Modal from 'flarum/components/Modal';
 import ItemList from "flarum/utils/ItemList";
 import Button from "flarum/components/Button";
@@ -31,32 +32,42 @@ export default class NewAchievementModal extends Modal {
 
     fields() {
         const items = new ItemList();
-        for(var i=0;i<this.attrs.achievements.length;i++){
+        for (var i = 0; i < this.attrs.achievements.length; i++) {
             var rectangle = this.attrs.achievements[i].rectangle.split(',');
 
-            var style="background:url("+this.attrs.achievements[i].image+");\
-                background-position:-"+rectangle[0]+"px -"+rectangle[1]+"px;\
-                height:"+rectangle[2]+"px;\
-                width:"+rectangle[3]+"px;";
-            
+            if (this.attrs.achievements[i].image.includes("http")) {
+                var style = "background:url(" + this.attrs.achievements[i].image + ");\
+                    background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+                    height:"+ rectangle[2] + "px;\
+                    width:"+ rectangle[3] + "px;";
+
+                items.add(
+                    "image" + i,
+                    <div className="Form-group">
+                        <span class='Badge Achievement' style={style}></span>
+                    </div>,
+                    -10
+                );
+            } else {
+                items.add(
+                    "image" + i,
+                    <div className="Form-group">
+                        <span class='Badge Achievement--Icon'>{icon(this.attrs.achievements[i].image)}</span>
+                    </div>,
+                    -10
+                );
+            }
+
             items.add(
-                "image"+i,
-                <div className="Form-group">
-                    <span class='Badge Achievement' style={style}></span>
-                </div>,
-                -10
-            );
-    
-            items.add(
-                "name"+i,
+                "name" + i,
                 <div className="Form-group">
                     <h1>{this.attrs.achievements[i].name}</h1>
                 </div>,
                 -10
             );
-    
+
             items.add(
-                "description"+i,
+                "description" + i,
                 <div className="Form-group">
                     <h3>{this.attrs.achievements[i].description}</h3>
                 </div>,
@@ -68,16 +79,16 @@ export default class NewAchievementModal extends Modal {
             "close",
             <div className="NewAchievementModal--Button">
                 {Button.component(
-                {
-                    type: "button",
-                    className: "Button Button--primary",
-                    onclick: this.hide.bind(this),
-                },
-                app.translator.trans(
-                    "malago-achievements.forum.new_achievement_close"
-                )
+                    {
+                        type: "button",
+                        className: "Button Button--primary",
+                        onclick: this.hide.bind(this),
+                    },
+                    app.translator.trans(
+                        "malago-achievements.forum.new_achievement_close"
+                    )
                 )}
-                
+
             </div>,
             -10
         );
@@ -90,24 +101,24 @@ export default class NewAchievementModal extends Modal {
         return null;
     }
 
-    content(){
+    content() {
         if (this.loading) {
             return (
                 <div className="Modal-body">
-                <div className="Form">
-                    <div className="container">
-                    <LoadingIndicator />
+                    <div className="Form">
+                        <div className="container">
+                            <LoadingIndicator />
+                        </div>
                     </div>
-                </div>
                 </div>
             );
         }
-            
+
         return (
             <div className="Modal-body">
-              <div className="Modal--New-Achievement">{this.fields().toArray()}</div>
+                <div className="Modal--New-Achievement">{this.fields().toArray()}</div>
             </div>
-          );
+        );
     }
 
     // Instead of hitting /register (which would change which user is connected in this session)

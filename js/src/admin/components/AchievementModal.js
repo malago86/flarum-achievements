@@ -31,36 +31,36 @@ export default class AchievementModal extends Modal {
     this.id = Stream(this.achievement.data.id || "-");
     this.name = Stream(this.achievement.name() || "");
     this.description = Stream(this.achievement.description() || "");
-    if(this.achievement.computation()){
+    if (this.achievement.computation()) {
       var c = this.achievement.computation().split(':');
       this.selected_variable = Stream(c[0])
       this.computation = Stream(c[1]);
 
-      if(this.selected_variable() == "avatar" || this.selected_variable() == "manual"){
+      if (this.selected_variable() == "avatar" || this.selected_variable() == "manual") {
         $(".FormInline").hide();
       }
-    }else{
-      this.computation=Stream("");
+    } else {
+      this.computation = Stream("");
       this.selected_variable = Stream("manual");
     }
-    
+
     this.points = Stream(this.achievement.points() || "");
     this.image = Stream(this.achievement.image() || "");
     this.active = Stream(this.achievement.active() || "");
 
-    if(this.achievement.rectangle()){
-      var rectangle=this.achievement.rectangle().split(',');
+    if (this.achievement.rectangle()) {
+      var rectangle = this.achievement.rectangle().split(',');
 
-      this.row=Stream(rectangle[0]/rectangle[2]+1);
-      this.col=Stream(rectangle[1]/rectangle[3]+1);
+      this.row = Stream(rectangle[0] / rectangle[2] + 1);
+      this.col = Stream(rectangle[1] / rectangle[3] + 1);
 
-      this.width=Stream(rectangle[3]);
-      this.height=Stream(rectangle[2]);
-    }else{
-      this.row=Stream("1");
-      this.col=Stream("1");
-      this.width=Stream("");
-      this.height=Stream("");
+      this.width = Stream(rectangle[3]);
+      this.height = Stream(rectangle[2]);
+    } else {
+      this.row = Stream("1");
+      this.col = Stream("1");
+      this.width = Stream("");
+      this.height = Stream("");
     }
 
   }
@@ -73,8 +73,8 @@ export default class AchievementModal extends Modal {
     return this.name()
       ? this.name() + " ID: " + this.id()
       : app.translator.trans(
-          "malago-achievements.admin.achievement_modal.title"
-        );
+        "malago-achievements.admin.achievement_modal.title"
+      );
   }
 
   content() {
@@ -129,9 +129,9 @@ export default class AchievementModal extends Modal {
         </label>
         {Checkbox.component(
           {
-            state:this.active(),
+            state: this.active(),
             onchange: () => {
-                this.active((this.active()+1)%2);
+              this.active((this.active() + 1) % 2);
             },
           }
         )}
@@ -140,85 +140,85 @@ export default class AchievementModal extends Modal {
     );
 
     items.add(
-        "description",
-        <div className="Form-group">
-            <label>
-            {app.translator.trans(
-                "malago-achievements.admin.achievement_modal.description_label"
-            )}
-            </label>
-            <input
-            className="FormControl"
-            placeholder={app.translator.trans(
-                "malago-achievements.admin.achievement_modal.description_placeholder"
-            )}
-            bidi={this.description}
-            />
-        </div>,
-        50
-        );
+      "description",
+      <div className="Form-group">
+        <label>
+          {app.translator.trans(
+            "malago-achievements.admin.achievement_modal.description_label"
+          )}
+        </label>
+        <input
+          className="FormControl"
+          placeholder={app.translator.trans(
+            "malago-achievements.admin.achievement_modal.description_placeholder"
+          )}
+          bidi={this.description}
+        />
+      </div>,
+      50
+    );
 
     items.add(
-        "computation",
-        <div className="Form-group">
-          <label>{app.translator.trans(
+      "computation",
+      <div className="Form-group">
+        <label>{app.translator.trans(
+          "malago-achievements.admin.achievement_modal.variable_label"
+        )}</label>
+        <GroupSelector
+          label={app.translator.trans(
             "malago-achievements.admin.achievement_modal.variable_label"
-          )}</label>
-          <GroupSelector
-            label={app.translator.trans(
-              "malago-achievements.admin.achievement_modal.variable_label"
-            )}
-            id={this.selected_variable}
-          ></GroupSelector>
-          <input
-            className={this.selected_variable()=="avatar"?"FormControl FormHidden FormInline":"FormControl FormInline"}
-            placeholder={app.translator.trans(
-                "malago-achievements.admin.achievement_modal.computation_placeholder"
-            )}
-            bidi={this.computation}
-            />
-        </div>
-        ,
-        50
-      );
+          )}
+          id={this.selected_variable}
+        ></GroupSelector>
+        <input
+          className={this.selected_variable() == "avatar" || this.selected_variable() == "manual" ? "FormControl FormHidden FormInline" : "FormControl FormInline"}
+          placeholder={app.translator.trans(
+            "malago-achievements.admin.achievement_modal.computation_placeholder"
+          )}
+          bidi={this.computation}
+        />
+      </div>
+      ,
+      50
+    );
 
     items.add(
-        "points",
-        <div className="Form-group">
-            <label>
-            {app.translator.trans(
-                "malago-achievements.admin.achievement_modal.points_label"
-            )}
-            </label>
-            <input
-            className="FormControl"
-            placeholder={app.translator.trans(
-                "malago-achievements.admin.achievement_modal.points_placeholder"
-            )}
-            bidi={this.points}
-            />
-        </div>,
-        50
-        );
+      "points",
+      <div className="Form-group">
+        <label>
+          {app.translator.trans(
+            "malago-achievements.admin.achievement_modal.points_label"
+          )}
+        </label>
+        <input
+          className="FormControl"
+          placeholder={app.translator.trans(
+            "malago-achievements.admin.achievement_modal.points_placeholder"
+          )}
+          bidi={this.points}
+        />
+      </div>,
+      50
+    );
     items.add(
-        "image",
-        <div className="Form-group">
-            <label>
-            {app.translator.trans(
-                "malago-achievements.admin.achievement_modal.image_label"
-            )}
-            </label>
-            <input
-            className="FormControl"
-            placeholder={app.translator.trans(
-                "malago-achievements.admin.achievement_modal.image_placeholder"
-            )}
-            bidi={this.image}
-            onchange={this.showImage()}
-            />
-        </div>,
-        50
-        );
+      "image",
+      <div className="Form-group">
+        <label>
+          {app.translator.trans(
+            "malago-achievements.admin.achievement_modal.image_label"
+          )}
+        </label>
+        <input
+          className="FormControl"
+          placeholder={app.translator.trans(
+            "malago-achievements.admin.achievement_modal.image_placeholder"
+          )}
+          bidi={this.image}
+          onchange={this.showImage()}
+        />
+      </div>,
+      50
+    );
 
     items.add(
       "image-show",
@@ -233,91 +233,91 @@ export default class AchievementModal extends Modal {
 
     items.add(
       "size",
-      <div className="Form-group">
+      <div className="Form-group Image-data">
         <table className="AchievementModal-Table">
           <tr>
             <td>
               <label>
-              {app.translator.trans(
+                {app.translator.trans(
                   "malago-achievements.admin.achievement_modal.height_label"
-              )}
-              </label>
-            </td>
-          <td>
-            <label>
-            {app.translator.trans(
-                "malago-achievements.admin.achievement_modal.width_label"
-            )}
-            </label>
-          </td>
-          </tr>
-          <tr>
-            <td>
-            <input
-              className="FormControl"
-              bidi={this.height}
-              onchange={this.showImage()}
-              type="number"
-            />
-            </td>
-            <td>
-            <input
-              className="FormControl"
-              bidi={this.width}
-              onchange={this.showImage()}
-              type="number"
-            />
-            </td>
-          </tr>
-          </table>
-      </div>,
-      50
-    );  
-
-    items.add(
-      "position",
-      <div className="Form-group">
-        <table className="AchievementModal-Table">
-          <tr>
-            <td>
-              <label>
-              {app.translator.trans(
-                  "malago-achievements.admin.achievement_modal.row_label"
-              )}
+                )}
               </label>
             </td>
             <td>
               <label>
                 {app.translator.trans(
-                    "malago-achievements.admin.achievement_modal.col_label"
+                  "malago-achievements.admin.achievement_modal.width_label"
                 )}
               </label>
             </td>
           </tr>
           <tr>
             <td>
-            <input
-              className="FormControl"
-              placeholder={1}
-              bidi={this.col}
-              onchange={this.showImage()}
-              type="number"
-            />
+              <input
+                className="FormControl"
+                bidi={this.height}
+                onchange={this.showImage()}
+                type="number"
+              />
             </td>
             <td>
-            <input
-              className="FormControl"
-              placeholder={1}
-              bidi={this.row}
-              onchange={this.showImage()}
-              type="number"
-            />
+              <input
+                className="FormControl"
+                bidi={this.width}
+                onchange={this.showImage()}
+                type="number"
+              />
             </td>
           </tr>
         </table>
       </div>,
       50
-    );  
+    );
+
+    items.add(
+      "position",
+      <div className="Form-group Image-data">
+        <table className="AchievementModal-Table">
+          <tr>
+            <td>
+              <label>
+                {app.translator.trans(
+                  "malago-achievements.admin.achievement_modal.row_label"
+                )}
+              </label>
+            </td>
+            <td>
+              <label>
+                {app.translator.trans(
+                  "malago-achievements.admin.achievement_modal.col_label"
+                )}
+              </label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                className="FormControl"
+                placeholder={1}
+                bidi={this.col}
+                onchange={this.showImage()}
+                type="number"
+              />
+            </td>
+            <td>
+              <input
+                className="FormControl"
+                placeholder={1}
+                bidi={this.row}
+                onchange={this.showImage()}
+                type="number"
+              />
+            </td>
+          </tr>
+        </table>
+      </div>,
+      50
+    );
 
     items.add(
       "submit",
@@ -353,21 +353,32 @@ export default class AchievementModal extends Modal {
     return items;
   }
 
-  showImage(){
-    $(".AchievementImage-Show").css("background-position","-"+((this.row()-1)*this.height())+"px -"+((this.col()-1)*this.width())+"px");
-    $(".AchievementImage-Show").css("background-image","url("+this.image()+")");
-    $(".AchievementImage-Show").css("width",this.width()+"px");
-    $(".AchievementImage-Show").css("height",this.height()+"px");
+  showImage() {
+
+    if (this.image().includes("http")) {
+      $(".AchievementImage-Show").html("");
+      $(".Image-data").show();
+      $(".AchievementImage-Show").css("background-position", "-" + ((this.row() - 1) * this.height()) + "px -" + ((this.col() - 1) * this.width()) + "px");
+      $(".AchievementImage-Show").css("background-image", "url(" + this.image() + ")");
+      $(".AchievementImage-Show").css("width", this.width() + "px");
+      $(".AchievementImage-Show").css("height", this.height() + "px");
+    } else {
+      $(".AchievementImage-Show").html("<i class='icon " + this.image() + "'></i>");
+      $(".AchievementImage-Show").css("background", "none");
+      $(".AchievementImage-Show").css("height", "32px");
+      $(".AchievementImage-Show").css("width", "32px");
+      $(".Image-data").hide();
+    }
   }
 
   submitData() {
     const data = {
       name: this.name(),
       description: this.description(),
-      computation: this.selected_variable()+":"+this.computation(),
+      computation: this.selected_variable() + ":" + this.computation(),
       points: this.points(),
       image: this.image(),
-      rectangle: [(this.row()-1)*this.height(), (this.col()-1)*this.width(), this.height(), this.width()].join(','),
+      rectangle: [(this.row() - 1) * this.height(), (this.col() - 1) * this.width(), this.height(), this.width()].join(','),
       active: this.active()
     };
 
