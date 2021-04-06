@@ -39,7 +39,7 @@ class UpdateAchievementsOnLike
         $arr = array(
             array(
                 "type"=>"likes",
-                "count"=>$event->actor->join('post_likes', 'users.id', '=', 'post_likes.user_id')->count(),
+                "count"=>User::where("id","=",$event->actor->id)->join('post_likes', 'users.id', '=', 'post_likes.user_id')->count(),
                 "user"=>$event->actor,
                 "new"=>0,
             ),
