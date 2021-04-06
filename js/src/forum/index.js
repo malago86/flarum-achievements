@@ -27,6 +27,7 @@ import PostEdited from 'flarum/components/PostEdited'
 import Achievement from '../common/models/Achievement';
 import Application from 'flarum/common/Application';
 import NewAchievementModal from './modals/NewAchievementModal';
+import icon from "flarum/helpers/icon";
 import IndexPage from 'flarum/components/IndexPage'
 import Page from 'flarum/components/Page'
 
@@ -39,20 +40,29 @@ app.initializers.add('malago-achievements', app => {
 
     if (!this.attrs.post.data.attributes.isHidden) {
       this.attrs.post.data.attributes.achievements.forEach(function (item, index) {
+        console.log(item.name + "|" + item.image);
         var rectangle = item.rectangle.split(',');
-        var style = "background:url(" + item.image + ");\
-        background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
-        height:"+ rectangle[2] + "px;\
-        width:"+ rectangle[3] + "px;\
-        margin: -"+ (rectangle[3] / 4 - 4) + "px;";
-        html += "<span class='Badge Achievement' style='" + style + "' data-toggle='tooltip' title='" + item.name + "'></span>";
+        if (item.image.includes("http")) {
+          var style = "background:url(" + item.image + ");\
+            background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+            height:"+ rectangle[2] + "px;\
+            width:"+ rectangle[3] + "px;\
+            margin: -"+ (rectangle[3] / 4 - 4) + "px;";
+          html += "<span class='Badge Achievement' style='" + style + "' data-toggle='tooltip' title='" + item.name + "'></span>";
+        } else {
+          html += "<span class='Badge Achievement--Icon' data-toggle='tooltip' title='" + item.name + "'><i class='icon " + item.image + "'></i></span>";
+        }
+
         points += item.points;
       });
-      html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
-        "malago-achievements.forum.achievement_points") + "'>" + points + "</span>";
-      $(this.element).append(html);
-      $(".Achievement").tooltip();
-      $(".Achievement--Points").tooltip();
+      if (html !== "") {
+        html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
+          "malago-achievements.forum.achievement_points") + "'>" + points + "</span>";
+        $(this.element).append(html);
+        $(".Achievement--Icon").tooltip();
+        $(".Achievement").tooltip();
+        $(".Achievement--Points").tooltip();
+      }
     }
   });
 

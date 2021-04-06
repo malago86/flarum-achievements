@@ -24,28 +24,37 @@ function AchievementsItem(achievement) {
   const name = achievement
     ? achievement.name()
     : app.translator.trans(
-        "malago-achievements.admin.achievements_page.create_achievement_button"
-      );
-  const rectangle = (achievement?achievement.rectangle():"0,0,32,32").split(',')
+      "malago-achievements.admin.achievements_page.create_achievement_button"
+    );
+  const rectangle = (achievement ? achievement.rectangle() : "0,0,32,32").split(',')
 
-  const iconName = achievement ? "" : icon("fas fa-plus");
+  var iconName = achievement ? "" : icon("fas fa-plus");
 
-  const addString=app.translator.trans("malago-achievements.admin.achievements_page.add_delete_users")
+  const addString = app.translator.trans("malago-achievements.admin.achievements_page.add_delete_users")
 
-  const style="background:url("+(achievement?achievement.image():"")+");\
-    background-position:-"+rectangle[0]+"px -"+rectangle[1]+"px;\
-    height:"+rectangle[2]+"px;\
-    width:"+rectangle[3]+"px;";
+  var style = "background:none;\
+      height:32px;\
+      width:32px;";
+
+  if (achievement)
+    if (achievement.image().includes("http")) {
+      style = "background:url(" + achievement.image() + ");\
+      background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+      height:"+ rectangle[2] + "px;\
+      width:"+ rectangle[3] + "px;";
+    } else {
+      iconName = icon(achievement.image());
+    }
   return (
     <div
       className="ExtensionListItem"
     >
       <span className="ExtensionListItem-icon ExtensionIcon Achievement" style={style} onclick={() => app.modal.show(AchievementModal, { model: achievement })}>
-      {iconName}</span>
+        {iconName}</span>
       <span className="ExtensionListItem-title">{name}</span>
-      <span className="ExtensionListItem-user" data-toggle='tooltip' title={addString} onclick={() => achievement?app.modal.show(AchievementUserModal, { model: achievement }):null}><i class="fas fa-users-cog"></i></span>
+      <span className="ExtensionListItem-user" data-toggle='tooltip' title={addString} onclick={() => achievement ? app.modal.show(AchievementUserModal, { model: achievement }) : null}><i class="fas fa-users-cog"></i></span>
     </div>
-    
+
   );
 }
 
@@ -59,7 +68,7 @@ export default class AchievementsPage extends ExtensionPage {
       this.loading = false;
       m.redraw();
     });
-    
+
   }
   content() {
     if (this.loading) {
