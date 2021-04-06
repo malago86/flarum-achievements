@@ -52,6 +52,6 @@ class UpdateAchievementsOnLike
         );
 
 
-        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
+        $event->actor["new_achievements"] = $this->calculator->recalculate($event->actor,$arr);
     }
 }

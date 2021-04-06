@@ -37,6 +37,6 @@ class UpdateAchievementsOnAvatarChanged
             )
         );
 
-        $GLOBALS["new_achievements"] = $this->calculator->recalculate($event->user,$arr);
+        $event->actor["new_achievements"] = $this->calculator->recalculate($event->user,$arr);
     }
 }

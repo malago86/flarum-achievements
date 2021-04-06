@@ -24,13 +24,7 @@ class MiddlewarePosted implements MiddlewareInterface {
     {
         $actor = $request->getAttribute('actor');    
 
-
-
         $response = $handler->handle($request);
-        // if(isset($GLOBALS["new_achievements"]))
-		//     app('log')->error("global: ".print_r($GLOBALS["new_achievements"],TRUE));		
-
-		
         
         $where = $request->getAttribute('routeName');
 		
@@ -42,8 +36,7 @@ class MiddlewarePosted implements MiddlewareInterface {
                 if(method_exists($response,"getPayload")){
                     $current = $this->toAssoc($actor->achievements->toArray());
                     $currentPayload=$response->getPayload();
-                    if(isset($GLOBALS["new_achievements"]))
-                        $currentPayload["new_achievements"]=$GLOBALS["new_achievements"];
+                    $currentPayload["new_achievements"]=$actor["new_achievements"];
         
                     $response = $response->withPayload($currentPayload);
                 }
