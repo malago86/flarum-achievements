@@ -40,7 +40,7 @@ app.initializers.add('malago-achievements', app => {
 
     if (!this.attrs.post.data.attributes.isHidden) {
       this.attrs.post.data.attributes.achievements.forEach(function (item, index) {
-        console.log(item.name + "|" + item.image);
+
         var rectangle = item.rectangle.split(',');
         if (item.image.includes("http")) {
           var style = "background:url(" + item.image + ");\
@@ -57,8 +57,9 @@ app.initializers.add('malago-achievements', app => {
       });
       if (html !== "") {
         html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
-          "malago-achievements.forum.achievement_points") + "'>" + points + "</span>";
-        $(this.element).append(html);
+          "malago-achievements.forum.achievement_points") + "'>" + app.translator.trans(
+            "malago-achievements.forum.achievement_points") + ": <span class='Achievement--Points--Number'>" + points + "</span></span>";
+        $(this.element).find(".Post-body").after("<div class='Achievements--User'>" + html + "</div>");
         $(".Achievement--Icon").tooltip();
         $(".Achievement").tooltip();
         $(".Achievement--Points").tooltip();

@@ -1,3 +1,13 @@
+### 0.2.3
+- Minor changes to achievements list in posts
+- Updated compatibility with Flarum beta 16
+
+### 0.2.2
+- Fixed compiled JS files
+
+### 0.2.1
+- Fixed a bug with likes given calculation
+
 ### 0.2.0
 - Added the option to use Font Awesome icons instead of an external image for the achievement icon. Use the icon code (e.g. `far fa-comments`) and it will understand that it is not a URL.
 - Added two achievement examples in the README

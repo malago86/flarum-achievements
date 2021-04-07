@@ -19,7 +19,7 @@ malago-achievements:
       points_label: Puntos para este logro
       points_placeholder: |
         0
-      image_label: URL de la imagen
+      image_label: URL de la imagen o código del icono
       image_placeholder: URL de la imagen
       row_label: Fila
       row_placeholder: 0
