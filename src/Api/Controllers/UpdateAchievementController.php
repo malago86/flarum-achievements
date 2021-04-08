@@ -75,7 +75,7 @@ class UpdateAchievementController extends AbstractShowController
             $ach->active = Arr::get($attributes,"active");
         }
 
-        app('log')->error(print_r($attributes,TRUE));
+        //app('log')->error(print_r($attributes,TRUE));
 
         $this->validator->assertValid($ach->getDirty());
 
