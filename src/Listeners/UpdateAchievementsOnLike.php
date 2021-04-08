@@ -15,6 +15,7 @@ use Malago\Achievements\AchievementCalculator;
 use Flarum\Likes\Event\PostWasLiked;
 use Flarum\Likes\Event\PostWasUnliked;
 use Flarum\Post\Post;
+use Flarum\User\User;
 use Flarum\Post\CommentPost;
 use Flarum\Discussion\Discussion;
 use Illuminate\Database\Eloquent\Model;
