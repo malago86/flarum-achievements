@@ -30,8 +30,18 @@ import NewAchievementModal from './modals/NewAchievementModal';
 import icon from "flarum/helpers/icon";
 import IndexPage from 'flarum/components/IndexPage'
 import Page from 'flarum/components/Page'
+import AchievementsPage from './components/AchievementsPage'
+import LinkButton from 'flarum/components/LinkButton';
 
 app.initializers.add('malago-achievements', app => {
+  app.routes['achievements'] = { path: '/achievements', component: AchievementsPage };
+  extend(IndexPage.prototype, 'navItems', function (items) {
+    items.add('achievements', <LinkButton icon="fas fa-trophy" href={app.route('achievements')}>
+      {app.translator.trans("malago-achievements.forum.list_heading")}
+    </LinkButton>
+      , -11);
+  });
+  
   registerModels();
 
   extend(CommentPost.prototype, 'oncreate', function (x) {
@@ -56,9 +66,11 @@ app.initializers.add('malago-achievements', app => {
         points += item.points;
       });
       if (html !== "") {
-        html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
-          "malago-achievements.forum.achievement_points") + "'>" + app.translator.trans(
-            "malago-achievements.forum.achievement_points") + ": <span class='Achievement--Points--Number'>" + points + "</span></span>";
+        if (points > 0) {
+          html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
+            "malago-achievements.forum.achievement_points") + "'>" + app.translator.trans(
+              "malago-achievements.forum.achievement_points") + ": <span class='Achievement--Points--Number'>" + points + "</span></span>";
+        }
         $(this.element).find(".Post-body").after("<div class='Achievements--User'>" + html + "</div>");
         $(".Achievement--Icon").tooltip();
         $(".Achievement").tooltip();
@@ -70,7 +82,7 @@ app.initializers.add('malago-achievements', app => {
   extend(Application.prototype, 'request', function (promise) {
     if (promise) {
       promise.then(function (data) {
-        if (data.new_achievements !== undefined && data.new_achievements !== null && data.new_achievements.length > 0)
+        if (data && data.new_achievements !== undefined && data.new_achievements !== null && data.new_achievements.length > 0)
           app.modal.show(NewAchievementModal, { achievements: data.new_achievements });
       });
     }

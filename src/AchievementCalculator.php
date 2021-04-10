@@ -47,6 +47,8 @@ class AchievementCalculator
 
                     if($split[0]==$type){
                         $minmax=explode(",",$split[1]);
+
+                        // app('log')->error(print_r($minmax,TRUE));
                         
                         if(count($minmax)==1){
                             if($number>=$minmax[0]){
@@ -91,7 +93,7 @@ class AchievementCalculator
                                 ->rightjoin('discussion_tag', 'posts.discussion_id', '=', 'discussion_tag.discussion_id')
                                 ->leftjoin('tags', 'discussion_tag.tag_id', '=', 'tags.id')
                                 ->groupBy("discussion_tag.tag_id")
-                                ->where('name',$minmax[0])->count();
+                                ->where('slug',$minmax[0])->count();
                                 
                             if(count($minmax)==2){
                                 if($count>=$minmax[1]){

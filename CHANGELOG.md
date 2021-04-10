@@ -1,3 +1,23 @@
+### 0.3.0
+- Added a page with the Achievement list
+- Improved the modal for Achievements in the admin
+- Added a tooltip to help with the Variable field in the admin
+- Changed how the posts on tag works, now it uses the `slug` of the tag and not the full name. The variable field will need to be changed for this type of achievements.
+- Compatible with Flarum 1.0
+
+### 0.2.8
+- Fix JS error when receiving an EmptyResponse
+
+### 0.2.6
+- Hide points count when points are zero
+
+### 0.2.5
+- Removed JS log
+- Fixed calculation for comments on discussion achievements
+
+### 0.2.4
+- Fixed bug with Likes
+
 ### 0.2.3
 - Minor changes to achievements list in posts
 - Updated compatibility with Flarum beta 16
