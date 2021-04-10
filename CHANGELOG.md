@@ -1,3 +1,10 @@
+### 0.2.5
+- Removed JS log
+- Fixed calculation for comments on discussion achievements
+
+### 0.2.4
+- Fixed bug with Likes
+
 ### 0.2.3
 - Minor changes to achievements list in posts
 - Updated compatibility with Flarum beta 16

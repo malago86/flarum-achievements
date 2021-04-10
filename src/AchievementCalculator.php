@@ -47,6 +47,8 @@ class AchievementCalculator
 
                     if($split[0]==$type){
                         $minmax=explode(",",$split[1]);
+
+                        // app('log')->error(print_r($minmax,TRUE));
                         
                         if(count($minmax)==1){
                             if($number>=$minmax[0]){
