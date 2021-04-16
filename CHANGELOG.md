@@ -1,3 +1,6 @@
+### 0.2.6
+- Hide points count when points are zero
+
 ### 0.2.5
 - Removed JS log
 - Fixed calculation for comments on discussion achievements

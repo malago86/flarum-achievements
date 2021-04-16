@@ -56,9 +56,11 @@ app.initializers.add('malago-achievements', app => {
         points += item.points;
       });
       if (html !== "") {
-        html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
-          "malago-achievements.forum.achievement_points") + "'>" + app.translator.trans(
-            "malago-achievements.forum.achievement_points") + ": <span class='Achievement--Points--Number'>" + points + "</span></span>";
+        if (points > 0) {
+          html += "<span class='Achievement--Points' data-toggle='tooltip' title='" + app.translator.trans(
+            "malago-achievements.forum.achievement_points") + "'>" + app.translator.trans(
+              "malago-achievements.forum.achievement_points") + ": <span class='Achievement--Points--Number'>" + points + "</span></span>";
+        }
         $(this.element).find(".Post-body").after("<div class='Achievements--User'>" + html + "</div>");
         $(".Achievement--Icon").tooltip();
         $(".Achievement").tooltip();
