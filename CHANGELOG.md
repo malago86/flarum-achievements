@@ -1,3 +1,6 @@
+### 0.2.7
+- Fix JS error when receiving an EmptyResponse
+
 ### 0.2.6
 - Hide points count when points are zero
 
