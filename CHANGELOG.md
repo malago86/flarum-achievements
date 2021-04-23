@@ -1,4 +1,4 @@
-### 0.2.7
+### 0.2.8
 - Fix JS error when receiving an EmptyResponse
 
 ### 0.2.6
