@@ -65,7 +65,7 @@ malago-achievements:
           comments: Número mínimo de respuestas recibidas en una discusión (ej. 10) o un rango inclusivo (ej. 10,19)
           years:  Número mínimo de años registrado (ej. 10) o un rango inclusivo (ej. 10,19)
           meanwords: Palabra a buscar y número mínimo de veces que aparece de media (ej. pollo,10) o un rango inclusivo (ej. pollo,10,19)
-          tagposts: Etiqueta a buscar y número mínimo de mensajes en ella (ej. Off topic,10) o un rango inclusivo (ej. Off topic,10,19)
+          tagposts: Slug de la etiqueta a buscar y número mínimo de mensajes en ella (ej. off-topic,10) o un rango inclusivo (ej. off-topic,10,19)
     achievements_page:
       list_heading: Logros
       create_achievement_button: Crear logro nuevo

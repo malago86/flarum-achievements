@@ -65,7 +65,7 @@ malago-achievements:
         comments: Minimum number of responses received in a discussion (e.g. 10) or inclusive range (e.g. 10,19)
         years: Minimum number of years registered (e.g. 10) or inclusive range (e.g. 10,19)
         meanwords: Word to look for and minimum number of average appearances (e.g. chicken,10) or inclusive range (e.g. chicken,10,19)
-        tagposts: Tag to look for and minimum number of posts (e.g. Off topic,10) or inclusive range (e.g. Off topic,10,19)
+        tagposts: Slug of the tag to look for and minimum number of posts (e.g. off-topic,10) or inclusive range (e.g. off-topic,10,19)
     achievements_page:
       list_heading: Achievements
       create_achievement_button: Create New Achievement
