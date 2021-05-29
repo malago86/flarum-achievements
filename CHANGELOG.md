@@ -1,8 +1,8 @@
 ### 0.3.0
-- Added a page with the Achievement list
+- Added a page in the forum with the Achievements list
 - Improved the modal for Achievements in the admin
 - Added a tooltip to help with the Variable field in the admin
-- Changed how the posts on tag works, now it uses the `slug` of the tag and not the full name. The variable field will need to be changed for this type of achievements.
+- Changed how the achievement type _posts on tag_ works, now it uses the `slug` of the tag and not the full name. The variable field will need to be changed for this type of achievements.
 - Compatible with Flarum 1.0
 
 ### 0.2.8
