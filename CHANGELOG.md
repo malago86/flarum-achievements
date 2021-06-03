@@ -1,3 +1,8 @@
+### 0.3.1
+- Fixed Achievements page
+- Achievements page link will not show for non registered users
+- Changed tooltip to use the Tooltip component
+
 ### 0.3.0
 - Added a page in the forum with the Achievements list
 - Improved the modal for Achievements in the admin

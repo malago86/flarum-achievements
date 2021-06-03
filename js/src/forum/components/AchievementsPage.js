@@ -10,6 +10,9 @@ export default class AchievementsPage extends Page {
   oninit(vnode) {
     this.loading = true;
     super.oninit(vnode);
+    if (!app.session.user) {
+        m.route.set('/');
+    }
     this.achievements_ids = [];
     app.data.resources.map(item => { if(item.type=="achievements") this.achievements_ids.push(item.id)});
     this.achievements_all = [];
@@ -23,7 +26,6 @@ export default class AchievementsPage extends Page {
       this.achievements_all.map(item => {
         var rectangle = item.rectangle().split(',');
         var html = "";
-        this.points += item.points();
         if (item.image().includes("http")) {
           var style = "background:url(" + item.image() + ");\
             background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
@@ -45,10 +47,11 @@ export default class AchievementsPage extends Page {
               </div>\
             </li>';
         }
-        console.log(item.hidden());
-        if (this.achievements_ids.indexOf(item.data.id) !== -1)
+        
+        if (this.achievements_ids.indexOf(item.data.id) !== -1) {
           this.html_user += html;
-        else if (item.hidden() == 0)
+          this.points += item.points();
+        }else if (item.hidden() == 0)
           this.html_all += html;
         else
           this.hidden_count += 1;
@@ -65,7 +68,7 @@ export default class AchievementsPage extends Page {
       return <LoadingIndicator />;
     }
     return (
-      <div className="">
+      <div className="IndexPage">
         {IndexPage.prototype.hero()}
         <div className="container">
           <div className="sideNavContainer">
@@ -86,7 +89,7 @@ export default class AchievementsPage extends Page {
               </div>
                           
               <h2>{app.translator.trans("malago-achievements.forum.other_achievements")}</h2>
-              <div className="AchievementsList">
+              <div className="AchievementsList AchievementsList-Other">
                 <ul className="AchievementsList-achievements">
                   {m.trust(this.html_all)}
                   </ul>
