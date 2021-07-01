@@ -81,3 +81,7 @@ malago-achievements:
         <li>Introduce the width and height of the icon.</li>
         <li>Optional: If the image has more than one achievement icon, you can select which row and column to show for the icon.</li>
       add_delete_users: Añadir/Borrar logros de usuarios
+      show: Mostrar lista de logros:
+    settings:
+      show-post-footer: Al pie de cada mensaje
+      show-user-card: En la tarjeta de usuario

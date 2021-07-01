@@ -82,4 +82,8 @@ return [
     
     (new Extend\Middleware('api'))->add(MiddlewarePosted::class),
     (new Extend\Middleware('forum'))->add(MiddlewarePosted::class),
+
+    (new Extend\Settings)
+        ->serializeToForum('malago-achievements.show-post-footer', 'malago-achievements.show-post-footer')
+        ->serializeToForum('malago-achievements.show-user-card', 'malago-achievements.show-user-card')
 ];

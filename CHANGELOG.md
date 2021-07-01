@@ -1,3 +1,9 @@
+### 0.4.0
+- Added two options for where to show the achievements (on post footer and on user card)
+- Added a new location for the achievements on the popup user card
+- Fixed display of achievements list on users profile
+- Fixed bug with achievement for posts on discussion
+
 ### 0.3.1
 - Fixed Achievements page
 - Achievements page link will not show for non registered users

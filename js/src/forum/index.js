@@ -24,6 +24,7 @@ import Page from 'flarum/components/Page'
 import AchievementsPage from './components/AchievementsPage'
 import LinkButton from 'flarum/components/LinkButton';
 import Tooltip from "flarum/components/Tooltip";
+import UserCard from 'flarum/components/UserCard'
 
 app.initializers.add('malago-achievements', app => {
   app.routes['achievements'] = { path: '/achievements', component: AchievementsPage };
@@ -39,10 +40,51 @@ app.initializers.add('malago-achievements', app => {
   
   registerModels();
   
+  extend(UserCard.prototype, 'view', function (element) {
+    var points = 0;
+    //comment.children[0].children[2].children.splice(0,0, m("div.Achievements--User"));
+    const here = app.forum.attribute('malago-achievements.show-user-card');
+    // var element = this.element;
+    // element.appendChild(m('div'));
+    // $(element).append(m("div","HOLA"));
+    var list = m("div.UserCard-Achievement-list");
+    
+    if (here == "1" && element.attrs.className.includes("UserCard--popover")) {
+      var achievements = this.attrs.user.store.data.achievements;
+      Object.keys(achievements).forEach(obj => {
+        var item = achievements[obj].data.attributes;
+        var rectangle = item.rectangle.split(',');
+        if (item.image.includes("http")) {
+          var style = "background:url(" + item.image + ");\
+            background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+            height:"+ rectangle[2] + "px;\
+            width:"+ rectangle[3] + "px;\
+            margin: -"+ (rectangle[3] / 4 - 4) + "px;";
+            list.children.push(m(Tooltip, { text: item.name },
+            m("span.Badge.Achievement", { style: style }, ""))
+          );
+        } else {
+          list.children.push(m(Tooltip, { text: item.name }, m("span.Badge.Achievement--Icon",
+            m("i.icon." + item.image))
+          ));
+        }
+
+        points += item.points;
+      });
+      if (list.children.length > 0 && points > 0) {
+        list.children.push(m(Tooltip, { text: app.translator.trans("malago-achievements.forum.achievement_points") }, m("span.Achievement--Points", app.translator.trans(
+          "malago-achievements.forum.achievement_points") + ": ", m("span.Achievement--Points--Number", points))));
+      }
+      element.children.push(list);
+    }
+  })
+
   extend(CommentPost.prototype, 'view', function (comment) {
     var points = 0;
-    comment.children[0].children[2].children.splice(0,0, m("div.Achievements--User"));
-    if (!this.attrs.post.data.attributes.isHidden) {
+    //comment.children[0].children[2].children.splice(0,0, m("div.Achievements--User"));
+    const here = app.forum.attribute('malago-achievements.show-post-footer');
+
+    if (here=="1" && !this.attrs.post.data.attributes.isHidden) {
       this.attrs.post.data.attributes.achievements.forEach(function (item, index) {
         var rectangle = item.rectangle.split(',');
         if (item.image.includes("http")) {
