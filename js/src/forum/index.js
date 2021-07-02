@@ -51,31 +51,33 @@ app.initializers.add('malago-achievements', app => {
     
     if (here == "1" && element.attrs.className.includes("UserCard--popover")) {
       var achievements = this.attrs.user.store.data.achievements;
-      Object.keys(achievements).forEach(obj => {
-        var item = achievements[obj].data.attributes;
-        var rectangle = item.rectangle.split(',');
-        if (item.image.includes("http")) {
-          var style = "background:url(" + item.image + ");\
-            background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
-            height:"+ rectangle[2] + "px;\
-            width:"+ rectangle[3] + "px;\
-            margin: -"+ (rectangle[3] / 4 - 4) + "px;";
+      if (achievements !== undefined) {
+        Object.keys(achievements).forEach(obj => {
+          var item = achievements[obj].data.attributes;
+          var rectangle = item.rectangle.split(',');
+          if (item.image.includes("http")) {
+            var style = "background:url(" + item.image + ");\
+              background-position:-"+ rectangle[0] + "px -" + rectangle[1] + "px;\
+              height:"+ rectangle[2] + "px;\
+              width:"+ rectangle[3] + "px;\
+              margin: -"+ (rectangle[3] / 4 - 4) + "px;";
             list.children.push(m(Tooltip, { text: item.name },
-            m("span.Badge.Achievement", { style: style }, ""))
-          );
-        } else {
-          list.children.push(m(Tooltip, { text: item.name }, m("span.Badge.Achievement--Icon",
-            m("i.icon." + item.image))
-          ));
-        }
+              m("span.Badge.Achievement", { style: style }, ""))
+            );
+          } else {
+            list.children.push(m(Tooltip, { text: item.name }, m("span.Badge.Achievement--Icon",
+              m("i.icon." + item.image))
+            ));
+          }
 
-        points += item.points;
-      });
-      if (list.children.length > 0 && points > 0) {
-        list.children.push(m(Tooltip, { text: app.translator.trans("malago-achievements.forum.achievement_points") }, m("span.Achievement--Points", app.translator.trans(
-          "malago-achievements.forum.achievement_points") + ": ", m("span.Achievement--Points--Number", points))));
+          points += item.points;
+        });
+        if (list.children.length > 0 && points > 0) {
+          list.children.push(m(Tooltip, { text: app.translator.trans("malago-achievements.forum.achievement_points") }, m("span.Achievement--Points", app.translator.trans(
+            "malago-achievements.forum.achievement_points") + ": ", m("span.Achievement--Points--Number", points))));
+        }
+        element.children.push(list);
       }
-      element.children.push(list);
     }
   })
 
