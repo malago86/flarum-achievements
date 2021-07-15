@@ -61,10 +61,23 @@ return [
     (new Extend\ApiSerializer(Serializer\UserSerializer::class))
         ->hasMany('achievements', Serializers\AchievementSerializer::class),
 
+    (new Extend\ApiSerializer(Serializer\BasicUserSerializer::class))
+        ->hasMany('achievements', Serializers\AchievementSerializer::class)
+        ->attributes(AddUserData::class),
+
     (new Extend\ApiController(Controller\ListUsersController::class))
         ->addInclude('achievements'),
     (new Extend\ApiController(Controller\ShowUserController::class))
         ->addInclude('achievements'),
+    (new Extend\ApiController(Controller\UpdateUserController::class))
+        ->addInclude('achievements'),
+    (new Extend\ApiController(Controller\CreateUserController::class))
+        ->addInclude('achievements'),
+    (new Extend\ApiController(Controller\ShowDiscussionController::class))
+        ->addInclude('posts.user.achievements'),
+    (new Extend\ApiController(Controller\ListPostsController::class))
+        ->addInclude('user.achievements'),
+
     (new Extend\ApiSerializer(Serializer\PostSerializer::class))
         ->attributes(AddPostData::class),
 

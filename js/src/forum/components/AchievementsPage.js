@@ -50,7 +50,7 @@ export default class AchievementsPage extends Page {
         
         if (this.achievements_ids.indexOf(item.data.id) !== -1) {
           this.html_user += html;
-          this.points += item.points();
+          this.points += parseFloat(item.points());
         }else if (item.hidden() == 0)
           this.html_all += html;
         else

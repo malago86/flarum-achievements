@@ -1,3 +1,10 @@
+### 0.4.2
+- Fixed bug when request is made with no achievements
+- Fixed bug with wrong achievement list showing on user card
+
+### 0.4.1
+- Fixed no achievements bug
+
 ### 0.4.0
 - Added two options for where to show the achievements (on post footer and on user card)
 - Added a new location for the achievements on the popup user card
