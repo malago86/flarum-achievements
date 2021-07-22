@@ -38,6 +38,7 @@ class AchievementUserSerializer extends AbstractSerializer
         $achievement = Achievement::find($ach->achievement_id);
 
         return [
+            'id' => $ach->achievement_id,
             'name' => $achievement->name,
             'description'   => $achievement->description,
             'computation'   => $achievement->computation,
