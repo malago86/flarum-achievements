@@ -29,6 +29,7 @@ use Flarum\Likes\Event\PostWasUnliked;
 use Malago\Achievements\Api\Serializers;
 use Malago\Achievements\Api\Controllers;
 use Malago\Achievements\Achievement;
+use Malago\Achievements\AchievementUser;
 use Malago\Achievements\Api\Serializers\AchievementSerializer;
 use Malago\Achievements\Middlewares\MiddlewarePosted;
 
@@ -41,7 +42,8 @@ return [
         ->post('/achievements', 'achievements.create', Controllers\CreateAchievementController::class)
         ->patch('/achievements/{id}', 'achievements.update', Controllers\UpdateAchievementController::class)
         ->delete('/achievements/{id}', 'achievements.delete', Controllers\DeleteAchievementController::class)
-        ->post('/achievement_user', 'achievements_user.create', Controllers\CreateAchievementUserController::class),
+        ->post('/achievement_user', 'achievements_user.create', Controllers\CreateAchievementUserController::class)
+        ->patch('/achievement_user/{id}', 'achievements_user.update', Controllers\UpdateAchievementUserController::class),
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js')
         ->css(__DIR__.'/less/forum.less'),
@@ -51,15 +53,13 @@ return [
     new Extend\Locales(__DIR__.'/locale'),
     (new Extend\Model(User::class))
         ->relationship('achievements', function ($user) {
-            return $user->belongsToMany(Achievement::class, 'achievement_user')
-                ->withPivot("new")
-                ->withTimestamps();
+            return $user->hasMany(AchievementUser::class, 'user_id');
         }),
     (new Extend\ApiSerializer(Serializer\ForumSerializer::class))
         ->hasMany('achievements', Serializers\AchievementSerializer::class),
 
     (new Extend\ApiSerializer(Serializer\UserSerializer::class))
-        ->hasMany('achievements', Serializers\AchievementSerializer::class),
+        ->hasMany('achievements', Serializers\AchievementUserSerializer::class),
 
     (new Extend\ApiSerializer(Serializer\BasicUserSerializer::class))
         ->hasMany('achievements', Serializers\AchievementSerializer::class)

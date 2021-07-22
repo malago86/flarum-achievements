@@ -1,3 +1,6 @@
+### 0.4.3
+- Fixed bug with new achievement modal
+
 ### 0.4.2
 - Fixed bug when request is made with no achievements
 - Fixed bug with wrong achievement list showing on user card
