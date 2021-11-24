@@ -1,3 +1,6 @@
+### 0.5.2
+- Removed debug code
+
 ### 0.5.1
 - Fixed bug with Flarum 1.1.1
 

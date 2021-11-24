@@ -44,12 +44,9 @@ app.initializers.add('malago-achievements', app => {
 
   extend(UserCard.prototype, 'view', function (element) {
     var points = 0;
-    //comment.children[0].children[2].children.splice(0,0, m("div.Achievements--User"));
+
     const here = app.forum.attribute('malago-achievements.show-user-card');
-    // var element = this.element;
-    // element.appendChild(m('div'));
-    // $(element).append(m("div","HOLA"));
-    //console.log(this.attrs.user);
+
     var list = m("div.UserCard-Achievement-list");
 
     if (here == "1" && element.attrs.className.includes("UserCard--popover")) {
@@ -98,7 +95,7 @@ app.initializers.add('malago-achievements', app => {
             height:"+ rectangle[2] + "px;\
             width:"+ rectangle[3] + "px;\
             margin: -"+ (rectangle[3] / 4 - 4) + "px;";
-          console.log(comment);
+
           comment.children[0].children[2].children.push(m(Tooltip, { text: item.name },
             m("span.Badge.Achievement", { style: style }, ""))
           );
