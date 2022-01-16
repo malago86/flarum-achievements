@@ -1,5 +1,5 @@
 js/**/node_modules
 vendor/
 composer.lock
-package-lock.json
+js/dist/
 .gitignore
