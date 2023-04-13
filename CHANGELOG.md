@@ -1,3 +1,6 @@
+### 0.5.6
+- Fixed Less on Admin panel
+
 ### 0.5.5
 - Fixed a bug with some extensions
 
